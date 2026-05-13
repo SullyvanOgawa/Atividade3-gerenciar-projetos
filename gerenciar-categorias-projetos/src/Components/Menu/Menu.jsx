@@ -5,7 +5,7 @@ import { Link, Navbar } from 'react-router-dom';
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
 
-        <Navbar.Brand className="navbar-brand" to="/">
+        <Navbar.Brand className="navbar-brand">
           Gerenciar Categorias de Projetos
         </Navbar.Brand>
 
