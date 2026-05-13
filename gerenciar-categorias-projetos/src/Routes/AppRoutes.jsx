@@ -1,39 +1,36 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from '../Components/Navbar/Navbar'
+import Menu from '../Components/Menu/Menu';
+import Home from '../Pages/Home';
+import CadastroCategoria from '../Pages/CadastroCategoriaProject';
+import Categorias from '../Pages/CategoriasProject';
 
-import Home from '../Pages/Home'
-import CadastroCategoria from '../Pages/CadastroCategoriaProject'
-import Categorias from '../Pages/CategoriasProject'
-import ProjetosCadastrados from '../Pages/ProjetosCadastrados'
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
 
-      <Navbar />
+      <Menu />
 
       <Routes>
 
-        <Route path="/" element={<ProjetosCadastrados/>}/>
-
         <Route
           path="/home"
-          element={<Home />}
+         exact element={<Home />}
         />
 
         <Route
-          path="/cadastro-categoria"
+          path="/cadastro-categoria" exact
           element={<CadastroCategoria />}
         />
 
         <Route
-          path="/categorias"
+          path="/categorias" exact
           element={<Categorias />}
         />
 
       </Routes>
 
     </BrowserRouter>
-  )
+  );
 }

@@ -1,4 +1,9 @@
+import CardCategoriaProject from "../Components/CardCategoriaProject/CardCategoriaProject";
 export default function Home() {
-  return <h1>Home</h1>
+  return (
+    <div>
+       <CardCategoriaProject/> 
+    </div>
+  );
 }
 

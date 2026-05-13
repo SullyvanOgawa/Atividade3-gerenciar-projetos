@@ -1,4 +1,9 @@
+import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 export default function CategoriasProject() {
-  return <h1>Categoria</h1>
+  return (
+    <div>
+      <ProjectCategoriaList />
+    </div>
+  );
 }
 

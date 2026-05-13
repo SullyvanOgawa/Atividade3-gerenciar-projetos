@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, Navbar } from 'react-router-dom';
 
- export default function Navbar() {
+ export default function Menu() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
 
-        <Link className="navbar-brand" to="/">
-          Projetos e Categorias
-        </Link>
+        <Navbar.Brand className="navbar-brand" to="/">
+          Gerenciar Categorias de Projetos
+        </Navbar.Brand>
 
         <div>
           <ul className="navbar-nav flex-row gap-3">
@@ -41,6 +41,6 @@ import { Link } from 'react-router-dom'
 
       </div>
     </nav>
-  )
+  );
 }
 

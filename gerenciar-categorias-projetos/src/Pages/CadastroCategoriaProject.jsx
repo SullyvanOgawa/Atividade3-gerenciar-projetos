@@ -1,3 +1,6 @@
+import FormCategoriaProject from "../Components/FormCategoriaProject/FormCategoriaProject";
 export default function CadastroCategoriaProject() {
-  return <h1>Cadastro de Categoria</h1>
+  return (
+    <FormCategoriaProject />
+  );
 }
