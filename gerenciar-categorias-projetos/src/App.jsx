@@ -10,10 +10,26 @@ function App() {
     ) || [];
   });
 
+  function excluirCategoria(id) {
+
+    const categoriasAtualizadas =
+      categorias.filter(
+        (categoria) => categoria.id !== id
+      );
+
+    setCategorias(categoriasAtualizadas);
+
+    localStorage.setItem(
+      'categorias',
+      JSON.stringify(categoriasAtualizadas)
+    );
+  }
+
   return (
     <AppRoutes
       categorias={categorias}
       setCategorias={setCategorias}
+      excluirCategoria={excluirCategoria}
     />
   );
 }

@@ -1,8 +1,6 @@
 import CardCategoriaProject from "../CardCategoriaProject/CardCategoriaProject";
 
-export default function ProjectCategoriaList({
-  categorias
-}) {
+export default function ProjectCategoriaList({categorias, excluirCategoria}) {
 
   return (
     <div className="row g-3">
@@ -16,6 +14,7 @@ export default function ProjectCategoriaList({
 
           <CardCategoriaProject
             categoria={categoria}
+            excluirCategoria={excluirCategoria}
           />
 
         </div>

@@ -8,9 +8,23 @@ export default function FormCategoriaProject({
 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [erro, setErro] = useState('');
 
   function handleSubmit(e) {
+
     e.preventDefault();
+
+  
+    if (!nome.trim() || !descricao.trim()) {
+
+      setErro(
+        'Todos os campos devem ser preenchidos.'
+      );
+
+      return;
+    }
+
+    setErro('');
 
     const novaCategoria = {
       id: Date.now(),
@@ -20,6 +34,7 @@ export default function FormCategoriaProject({
 
     salvarCategoria(novaCategoria);
 
+    // LIMPA CAMPOS
     setNome('');
     setDescricao('');
   }
@@ -32,6 +47,12 @@ export default function FormCategoriaProject({
       </h2>
 
       <form onSubmit={handleSubmit}>
+
+        {erro && (
+          <div className="alert alert-danger">
+            {erro}
+          </div>
+        )}
 
         <div className="mb-3">
 

@@ -6,10 +6,7 @@ import Home from '../Pages/Home';
 import CadastroCategoriaProject from '../Pages/CadastroCategoriaProject';
 import CategoriasProject from '../Pages/CategoriasProject';
 
-export function AppRoutes({
-  categorias,
-  setCategorias
-}) {
+export function AppRoutes({categorias, setCategorias, excluirCategoria}) {
 
   return (
     <BrowserRouter>
@@ -20,7 +17,12 @@ export function AppRoutes({
 
         <Route
           path="/"
-          element={<Home categorias={categorias}/>}
+          element={
+            <Home
+              categorias={categorias}
+              excluirCategoria={excluirCategoria}
+            />
+          }
         />
 
         <Route
@@ -33,11 +35,12 @@ export function AppRoutes({
           }
         />
 
-       <Route
+      <Route
           path="/categorias"
           element={
             <CategoriasProject
               categorias={categorias}
+              excluirCategoria={excluirCategoria}
             />
           }
         />

@@ -1,8 +1,6 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function CategoriasProject({
-  categorias
-}) {
+export default function CategoriasProject({categorias, excluirCategoria}) {
 
   return (
     <div className="container mt-4">
@@ -13,6 +11,7 @@ export default function CategoriasProject({
 
       <ProjectCategoriaList
         categorias={categorias}
+        excluirCategoria={excluirCategoria}
       />
 
     </div>

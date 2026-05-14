@@ -1,6 +1,6 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function Home({categorias }) {
+export default function Home({categorias}) {
 
   return (
     <div className="container mt-4">
