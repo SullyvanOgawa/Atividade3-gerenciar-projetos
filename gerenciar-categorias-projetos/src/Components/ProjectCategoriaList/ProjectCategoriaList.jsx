@@ -1,8 +1,27 @@
+import CardCategoriaProject from "../CardCategoriaProject/CardCategoriaProject";
 
-export default function CardCategoriaProject() {
+export default function ProjectCategoriaList({
+  categorias
+}) {
+
   return (
-    <div>
-      <h1>Lista Categoria Project</h1>
+    <div className="row g-3">
+
+      {categorias.map((categoria) => (
+
+        <div
+          className="col-md-4"
+          key={categoria.id}
+        >
+
+          <CardCategoriaProject
+            categoria={categoria}
+          />
+
+        </div>
+
+      ))}
+
     </div>
   );
 }

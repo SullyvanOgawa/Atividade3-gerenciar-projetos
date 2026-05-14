@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Menu from '../Components/Menu/Menu';
+
 import Home from '../Pages/Home';
-import CadastroCategoria from '../Pages/CadastroCategoriaProject';
-import Categorias from '../Pages/CategoriasProject';
+import CadastroCategoriaProject from '../Pages/CadastroCategoriaProject';
+import CategoriasProject from '../Pages/CategoriasProject';
 
+export function AppRoutes({
+  categorias,
+  setCategorias
+}) {
 
-export function AppRoutes() {
   return (
     <BrowserRouter>
 
@@ -15,18 +19,27 @@ export function AppRoutes() {
       <Routes>
 
         <Route
-          path="/home"
-         exact element={<Home />}
+          path="/"
+          element={<Home categorias={categorias}/>}
         />
 
         <Route
-          path="/cadastro-categoria" exact
-          element={<CadastroCategoria />}
+          path="/cadastro-categoria"
+          element={
+            <CadastroCategoriaProject
+              categorias={categorias}
+              setCategorias={setCategorias}
+            />
+          }
         />
 
-        <Route
-          path="/categorias" exact
-          element={<Categorias />}
+       <Route
+          path="/categorias"
+          element={
+            <CategoriasProject
+              categorias={categorias}
+            />
+          }
         />
 
       </Routes>

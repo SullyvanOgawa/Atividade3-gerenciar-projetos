@@ -1,8 +1,9 @@
-import { Link, Navbar } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
 
  export default function Menu() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <Navbar className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
 
         <Navbar.Brand className="navbar-brand">
@@ -13,7 +14,7 @@ import { Link, Navbar } from 'react-router-dom';
           <ul className="navbar-nav flex-row gap-3">
 
             <li className="nav-item">
-              <Link className="nav-link" to="/home">
+              <Link className="nav-link" to="/">
                 Home
               </Link>
             </li>
@@ -40,7 +41,7 @@ import { Link, Navbar } from 'react-router-dom';
         </div>
 
       </div>
-    </nav>
+    </Navbar>
   );
 }
 

@@ -1,45 +1,81 @@
-export default function FormCategoriaProject() {
-    return(
-         <div className="card p-4 shadow-sm">
+import { useState } from "react";
 
-            <h2 className="mb-4">
-                Cadastro de Categoria
-            </h2>
+import Button from "../Botao/Botao";
 
-            <form>
+export default function FormCategoriaProject({
+  salvarCategoria
+}) {
 
-                <div className="mb-3">
-                <label className="form-label">
-                    Nome da Categoria
-                </label>
+  const [nome, setNome] = useState('');
+  const [descricao, setDescricao] = useState('');
 
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Digite o nome da categoria"
-                />
-                </div>
+  function handleSubmit(e) {
+    e.preventDefault();
 
-                <div className="mb-3">
-                <label className="form-label">
-                    Descrição
-                </label>
+    const novaCategoria = {
+      id: Date.now(),
+      nome,
+      descricao
+    };
 
-                <textarea
-                    className="form-control"
-                    rows="4"
-                    placeholder="Digite uma descrição"
-                ></textarea>
-                </div>
+    salvarCategoria(novaCategoria);
 
-                <button
-                type="submit"
-                className="btn btn-dark"
-                >
-                Salvar Categoria
-                </button>
+    setNome('');
+    setDescricao('');
+  }
 
-            </form>
+  return (
+    <div className="card p-4 shadow-sm">
+
+      <h2 className="mb-4">
+        Cadastro de Categoria Projeto
+      </h2>
+
+      <form onSubmit={handleSubmit}>
+
+        <div className="mb-3">
+
+          <label className="form-label">
+            Nome da Categoria
+          </label>
+
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Digite o nome da categoria"
+            value={nome}
+            onChange={(e) =>
+              setNome(e.target.value)
+            }
+          />
+
         </div>
-    );
+
+        <div className="mb-3">
+
+          <label className="form-label">
+            Descrição
+          </label>
+
+          <textarea
+            className="form-control"
+            rows="4"
+            placeholder="Digite uma descrição"
+            value={descricao}
+            onChange={(e) =>
+              setDescricao(e.target.value)
+            }
+          ></textarea>
+
+        </div>
+
+        <Button
+          texto="Salvar Categoria"
+          tipo="submit"
+        />
+
+      </form>
+
+    </div>
+  );
 }
