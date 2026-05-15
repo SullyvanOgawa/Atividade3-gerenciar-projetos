@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+  background-color: #EAEAD8;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title-page {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #2B6BCF;
+  letter-spacing: 2px;
+  font-size: 3rem;
+}
+
+.subtitle-page {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+
+.custom-card {
+  border: none;
+  border-radius: 12px;
+}
+
+
+.custom-shadow {
+  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+
+.btn-green {
+  background-color: #045148;
+  color: white;
+  border: none;
+}
+
+.btn-green:hover {
+  background-color: #033d36;
+  color: white;
+}
+
+
+.btn-orange {
+  background-color: #DA5321;
+  color: white;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #bb4318;
+  color: white;
+}
+
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+}
+
+
+.form-label {
+  font-weight: 500;
+}

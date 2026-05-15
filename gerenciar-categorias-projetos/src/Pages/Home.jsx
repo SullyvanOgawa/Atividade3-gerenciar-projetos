@@ -1,13 +1,19 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function Home({categorias}) {
+export default function Home({
+  categorias
+}) {
 
   return (
-    <div className="container mt-4">
+    <div className="container py-4">
 
-      <h1 className="mb-4">
-        Categorias em Destaque
-      </h1>
+      <div className="mb-4">
+
+        <h1 className="title-page mb-0">
+          CATEGORIAS EM DESTAQUE
+        </h1>
+
+      </div>
 
       <ProjectCategoriaList
         categorias={categorias}

@@ -14,7 +14,6 @@ export default function FormCategoriaProject({
 
     e.preventDefault();
 
-  
     if (!nome.trim() || !descricao.trim()) {
 
       setErro(
@@ -34,17 +33,35 @@ export default function FormCategoriaProject({
 
     salvarCategoria(novaCategoria);
 
-    // LIMPA CAMPOS
     setNome('');
     setDescricao('');
   }
 
   return (
-    <div className="card p-4 shadow-sm">
 
-      <h2 className="mb-4">
-        Cadastro de Categoria Projeto
+    <div
+      className="card border-0 shadow-sm rounded-4 p-4"
+      style={{
+        backgroundColor: '#FFFFFF'
+      }}
+    >
+
+      <h2
+        className="mb-1"
+        style={{
+          fontFamily: 'Bebas Neue',
+          color: '#2B6BCF',
+          letterSpacing: '1px',
+          fontSize: '2.5rem'
+
+        }}
+      >
+        Cadastro de Categoria
       </h2>
+
+      <p className="text-muted mb-4">
+        Cadastro e organização de categorias
+      </p>
 
       <form onSubmit={handleSubmit}>
 
@@ -54,15 +71,15 @@ export default function FormCategoriaProject({
           </div>
         )}
 
-        <div className="mb-3">
+        <div className="mb-4">
 
-          <label className="form-label">
+          <label className="form-label fw-semibold">
             Nome da Categoria
           </label>
 
           <input
             type="text"
-            className="form-control"
+            className="form-control rounded-3"
             placeholder="Digite o nome da categoria"
             value={nome}
             onChange={(e) =>
@@ -72,14 +89,14 @@ export default function FormCategoriaProject({
 
         </div>
 
-        <div className="mb-3">
+        <div className="mb-4">
 
-          <label className="form-label">
+          <label className="form-label fw-semibold">
             Descrição
           </label>
 
           <textarea
-            className="form-control"
+            className="form-control rounded-3"
             rows="4"
             placeholder="Digite uma descrição"
             value={descricao}

@@ -1,24 +1,46 @@
-export default function CardCategoriaProject({categoria,excluirCategoria}) {
+export default function CardCategoriaProject({
+  categoria,
+  excluirCategoria
+}) {
 
   return (
-    <div className="card p-3 shadow-sm">
 
-      <h3>{categoria.nome}</h3>
+    <div className="card border-0 shadow-sm h-100 rounded-4">
 
-      <p>{categoria.descricao}</p>
+      <div className="card-body d-flex flex-column">
 
-      {excluirCategoria && (
-
-        <button
-          className="btn btn-danger mt-3"
-          onClick={() =>
-            excluirCategoria(categoria.id)
-          }
+        <h3
+          className="fw-bold mb-3"
+          style={{
+            fontFamily: 'Bebas Neue',
+            color: '#2B6BCF',
+            letterSpacing: '1px'
+          }}
         >
-          Excluir
-        </button>
+          {categoria.nome}
+        </h3>
 
-      )}
+        <p className="text-muted flex-grow-1">
+          {categoria.descricao}
+        </p>
+
+        {excluirCategoria && (
+
+          <button
+            className="btn mt-3 text-white"
+            style={{
+              backgroundColor: '#DA5321'
+            }}
+            onClick={() =>
+              excluirCategoria(categoria.id)
+            }
+          >
+            Excluir
+          </button>
+
+        )}
+
+      </div>
 
     </div>
   );
