@@ -1,8 +1,19 @@
 import CardCategoriaProject from "../CardCategoriaProject/CardCategoriaProject";
 
-export default function ProjectCategoriaList({categorias, excluirCategoria}) {
+export default function ProjectCategoriaList({
+  categorias = [],
+  excluirCategoria,
+  editarCategoria
+}) {
+
+  if (!Array.isArray(categorias)) {
+
+    return <h3>Carregando...</h3>;
+
+  }
 
   return (
+
     <div className="row g-3">
 
       {categorias.map((categoria) => (
@@ -14,7 +25,12 @@ export default function ProjectCategoriaList({categorias, excluirCategoria}) {
 
           <CardCategoriaProject
             categoria={categoria}
-            excluirCategoria={excluirCategoria}
+            excluirCategoria={
+              excluirCategoria
+            }
+            editarCategoria={
+              editarCategoria
+            }
           />
 
         </div>

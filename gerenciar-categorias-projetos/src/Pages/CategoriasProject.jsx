@@ -2,14 +2,14 @@ import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCate
 
 export default function CategoriasProject({
   categorias,
-  excluirCategoria
+  excluirCategoria,
+  editarCategoria
 }) {
 
   return (
 
     <div className="container py-4">
 
-      {/* TOPO */}
       <div className="mb-4">
 
         <h1
@@ -30,8 +30,8 @@ export default function CategoriasProject({
 
       </div>
 
-      
-      {categorias.length > 0 ? (
+      {Array.isArray(categorias) &&
+      categorias.length > 0 ? (
 
         <div
           className="card border-0 shadow-sm rounded-4 p-4 mx-auto"
@@ -43,7 +43,12 @@ export default function CategoriasProject({
 
           <ProjectCategoriaList
             categorias={categorias}
-            excluirCategoria={excluirCategoria}
+            excluirCategoria={
+              excluirCategoria
+            }
+            editarCategoria={
+              editarCategoria
+            }
           />
 
         </div>
@@ -68,7 +73,8 @@ export default function CategoriasProject({
           </h3>
 
           <p className="text-muted mb-0">
-            Cadastre uma nova categoria para começar.
+            Cadastre uma nova categoria
+            para começar.
           </p>
 
         </div>

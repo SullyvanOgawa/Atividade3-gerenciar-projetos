@@ -1,10 +1,13 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
 export default function Home({
-  categorias
+  categorias,
+  excluirCategoria,
+  editarCategoria
 }) {
 
   return (
+
     <div className="container py-4">
 
       <div className="mb-4">
@@ -17,6 +20,12 @@ export default function Home({
 
       <ProjectCategoriaList
         categorias={categorias}
+        excluirCategoria={
+          excluirCategoria
+        }
+        editarCategoria={
+              editarCategoria
+            }
       />
 
     </div>

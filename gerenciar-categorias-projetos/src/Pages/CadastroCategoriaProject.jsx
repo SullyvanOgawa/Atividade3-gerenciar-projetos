@@ -1,29 +1,20 @@
 import FormCategoriaProject from "../Components/FormCategoriaProject/FormCategoriaProject";
 
-export default function CadastroCategoriaProject({categorias, setCategorias}) {
-
-  function salvarCategoria(novaCategoria) {
-
-    const novasCategorias = [
-      ...categorias,
-      novaCategoria
-    ];
-
-    setCategorias(novasCategorias);
-
-    localStorage.setItem(
-      'categorias',
-      JSON.stringify(novasCategorias)
-    );
-  }
+export default function CadastroCategoriaProject({
+  cadastrarCategoria
+}) {
 
   return (
+
     <div className="container mt-4">
 
       <FormCategoriaProject
-        salvarCategoria={salvarCategoria}
+        cadastrarCategoria={
+          cadastrarCategoria
+        }
       />
 
     </div>
+
   );
 }

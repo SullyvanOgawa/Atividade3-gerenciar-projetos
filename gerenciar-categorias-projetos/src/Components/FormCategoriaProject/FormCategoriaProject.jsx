@@ -3,14 +3,14 @@ import { useState } from "react";
 import Button from "../Botao/Botao";
 
 export default function FormCategoriaProject({
-  salvarCategoria
+  cadastrarCategoria
 }) {
 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [erro, setErro] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
 
     e.preventDefault();
 
@@ -26,15 +26,28 @@ export default function FormCategoriaProject({
     setErro('');
 
     const novaCategoria = {
-      id: Date.now(),
       nome,
       descricao
     };
 
-    salvarCategoria(novaCategoria);
+    try {
 
-    setNome('');
-    setDescricao('');
+      await cadastrarCategoria(
+        novaCategoria
+      );
+
+      setNome('');
+      setDescricao('');
+
+    } catch (error) {
+
+      console.error(error);
+
+      setErro(
+        'Erro ao cadastrar categoria.'
+      );
+
+    }
   }
 
   return (
@@ -53,7 +66,6 @@ export default function FormCategoriaProject({
           color: '#2B6BCF',
           letterSpacing: '1px',
           fontSize: '2.5rem'
-
         }}
       >
         Cadastro de Categoria
