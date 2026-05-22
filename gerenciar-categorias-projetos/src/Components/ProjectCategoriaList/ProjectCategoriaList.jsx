@@ -1,10 +1,6 @@
 import CardCategoriaProject from "../CardCategoriaProject/CardCategoriaProject";
 
-export default function ProjectCategoriaList({
-  categorias = [],
-  excluirCategoria,
-  editarCategoria
-}) {
+export default function ProjectCategoriaList({categorias = [], excluirCategoria, editarCategoria,mostrarAcoes = true}){
 
   if (!Array.isArray(categorias)) {
 
@@ -24,13 +20,11 @@ export default function ProjectCategoriaList({
         >
 
           <CardCategoriaProject
-            categoria={categoria}
-            excluirCategoria={
-              excluirCategoria
-            }
-            editarCategoria={
-              editarCategoria
-            }
+            categoria = {categoria}
+            excluirCategoria = {excluirCategoria}
+            editarCategoria = {editarCategoria}
+            mostrarAcoes = {mostrarAcoes}
+             
           />
 
         </div>

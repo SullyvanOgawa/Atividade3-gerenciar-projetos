@@ -33,9 +33,7 @@ function App() {
     }
   }
 
-  async function cadastrarCategoria(
-    novaCategoria
-  ) {
+  async function cadastrarCategoria(novaCategoria) {
 
     try {
 

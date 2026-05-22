@@ -1,7 +1,4 @@
-export default function Button({
-  texto,
-  tipo = 'button'
-}) {
+export default function Button({texto, tipo = 'button'}) {
 
   return (
 

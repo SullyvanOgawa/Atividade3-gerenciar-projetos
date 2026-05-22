@@ -2,9 +2,7 @@ import { useState } from "react";
 
 import Button from "../Botao/Botao";
 
-export default function FormCategoriaProject({
-  cadastrarCategoria
-}) {
+export default function FormCategoriaProject({cadastrarCategoria}) {
 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');

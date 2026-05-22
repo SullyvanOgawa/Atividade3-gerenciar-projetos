@@ -1,20 +1,11 @@
 import { useState } from "react";
 
-export default function CardCategoriaProject({
-  categoria,
-  excluirCategoria,
-  editarCategoria
-}) {
+export default function CardCategoriaProject({categoria, excluirCategoria, editarCategoria, mostrarAcoes = true}) {
 
-  const [editando, setEditando] =
-    useState(false);
-
-  const [nome, setNome] =
-    useState(categoria.nome);
-
-  const [descricao, setDescricao] =
-    useState(categoria.descricao);
-
+  const [editando, setEditando] = useState(false);
+  const [nome, setNome] = useState(categoria.nome);
+  const [descricao, setDescricao] = useState(categoria.descricao);
+    
   async function salvarEdicao() {
 
     const categoriaAtualizada = {
@@ -102,60 +93,64 @@ export default function CardCategoriaProject({
 
         )}
 
-        <div className="d-flex gap-2 mt-3">
+        {mostrarAcoes && (
 
-          {editando ? (
+          <div className="d-flex gap-2 mt-3">
 
-            <>
+            {editando ? (
 
-              <button
-                className="btn btn-success flex-grow-1"
-                onClick={salvarEdicao}
-              >
-                Salvar
-              </button>
+              <>
 
-              <button
-                className="btn btn-secondary flex-grow-1"
-                onClick={cancelarEdicao}
-              >
-                Cancelar
-              </button>
+                <button
+                  className="btn btn-success flex-grow-1"
+                  onClick={salvarEdicao}
+                >
+                  Salvar
+                </button>
 
-            </>
+                <button
+                  className="btn btn-secondary flex-grow-1"
+                  onClick={cancelarEdicao}
+                >
+                  Cancelar
+                </button>
 
-          ) : (
+              </>
 
-            <>
+            ) : (
 
-              <button
-                className="btn btn-primary flex-grow-1"
-                onClick={() =>
-                  setEditando(true)
-                }
-              >
-                Editar
-              </button>
+              <>
 
-              <button
-                className="btn text-white flex-grow-1"
-                style={{
-                  backgroundColor: '#DA5321'
-                }}
-                onClick={() =>
-                  excluirCategoria(
-                    categoria.id
-                  )
-                }
-              >
-                Excluir
-              </button>
+                <button
+                  className="btn btn-primary flex-grow-1"
+                  onClick={() =>
+                    setEditando(true)
+                  }
+                >
+                  Editar
+                </button>
 
-            </>
+                <button
+                  className="btn text-white flex-grow-1"
+                  style={{
+                    backgroundColor: '#DA5321'
+                  }}
+                  onClick={() =>
+                    excluirCategoria(
+                      categoria.id
+                    )
+                  }
+                >
+                  Excluir
+                </button>
 
-          )}
+              </>
 
-        </div>
+            )}
+
+          </div>
+
+        )}
 
       </div>
 

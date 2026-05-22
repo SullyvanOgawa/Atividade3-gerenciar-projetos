@@ -1,10 +1,6 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function Home({
-  categorias,
-  excluirCategoria,
-  editarCategoria
-}) {
+export default function Home({categorias}) {
 
   return (
 
@@ -19,13 +15,8 @@ export default function Home({
       </div>
 
       <ProjectCategoriaList
-        categorias={categorias}
-        excluirCategoria={
-          excluirCategoria
-        }
-        editarCategoria={
-              editarCategoria
-            }
+        categorias = {categorias}
+        mostrarAcoes = {false}
       />
 
     </div>

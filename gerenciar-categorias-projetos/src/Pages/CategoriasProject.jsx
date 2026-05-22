@@ -1,10 +1,6 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function CategoriasProject({
-  categorias,
-  excluirCategoria,
-  editarCategoria
-}) {
+export default function CategoriasProject({categorias, excluirCategoria, editarCategoria}) {
 
   return (
 
@@ -33,30 +29,21 @@ export default function CategoriasProject({
       {Array.isArray(categorias) &&
       categorias.length > 0 ? (
 
-        <div
-          className="card border-0 shadow-sm rounded-4 p-4 mx-auto"
-          style={{
-            backgroundColor: '#FFFFFF',
-            maxWidth: '1200px'
-          }}
+        <div 
         >
 
           <ProjectCategoriaList
             categorias={categorias}
-            excluirCategoria={
-              excluirCategoria
-            }
-            editarCategoria={
-              editarCategoria
-            }
+            excluirCategoria={excluirCategoria}
+            editarCategoria={editarCategoria}
+            mostrarAcoes = {true}
           />
 
         </div>
 
       ) : (
 
-        <div
-          className="text-center p-5 rounded-4 shadow-sm"
+        <div className="text-center p-5 rounded-4 shadow-sm"
           style={{
             backgroundColor: '#FFFFFF'
           }}
