@@ -7,11 +7,6 @@ function App() {
   const [categorias, setCategorias] =
     useState([]);
 
-  const [
-    categoriaEditando,
-    setCategoriaEditando
-  ] = useState(null);
-
   async function atualizarCategorias() {
 
     try {
@@ -20,20 +15,28 @@ function App() {
         'http://localhost:5000/categorias'
       );
 
-      const dados = await resposta.json();
+      const dados =
+        await resposta.json();
 
-      setCategorias(dados.categorias);
+      setCategorias(
+        dados.categorias
+      );
 
     } catch (error) {
 
-      console.error(error);
+      console.error(
+        'Erro ao carregar categorias:',
+        error
+      );
 
       setCategorias([]);
 
     }
   }
 
-  async function cadastrarCategoria(novaCategoria) {
+  async function cadastrarCategoria(
+    novaCategoria
+  ) {
 
     try {
 
@@ -57,38 +60,63 @@ function App() {
 
     } catch (error) {
 
-      console.error(error);
+      console.error(
+        'Erro ao cadastrar:',
+        error
+      );
 
     }
   }
 
- async function editarCategoria(categoriaAtualizada) {
-  try {
-    const resposta = await fetch(
-      `http://localhost:5000/categorias/${categoriaAtualizada.id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(categoriaAtualizada)
+  async function editarCategoria(
+    categoriaAtualizada
+  ) {
+
+    try {
+
+      const resposta = await fetch(
+        `http://localhost:5000/categorias/${categoriaAtualizada.id}`,
+        {
+          method: 'PUT',
+
+          headers: {
+            'Content-Type':
+              'application/json'
+          },
+
+          body: JSON.stringify(
+            categoriaAtualizada
+          )
+        }
+      );
+
+      const dados =
+        await resposta.json();
+
+      if (
+        !resposta.ok ||
+        !dados.status
+      ) {
+
+        console.error(
+          'Erro ao editar:',
+          dados.mensagem
+        );
+
+        return;
       }
-    );
 
-    const dados = await resposta.json();
+      await atualizarCategorias();
 
-    if (!resposta.ok || !dados.status) {
-      console.error("Erro ao editar:", dados.mensagem);
-      return;
+    } catch (error) {
+
+      console.error(
+        'Erro de rede:',
+        error
+      );
+
     }
-
-    setCategoriaEditando(null);
-    await atualizarCategorias();
-
-  } catch (error) {
-    console.error("Erro de rede:", error);
   }
-}
 
   async function excluirCategoria(id) {
 
@@ -105,20 +133,23 @@ function App() {
 
     } catch (error) {
 
-      console.error(error);
+      console.error(
+        'Erro ao excluir:',
+        error
+      );
 
     }
   }
 
   useEffect(() => {
 
-    const carregar = async () => {
+    async function carregarCategorias() {
 
       await atualizarCategorias();
 
-    };
+    }
 
-    carregar();
+    carregarCategorias();
 
   }, []);
 
@@ -134,12 +165,6 @@ function App() {
       }
       excluirCategoria={
         excluirCategoria
-      }
-      categoriaEditando={
-        categoriaEditando
-      }
-      setCategoriaEditando={
-        setCategoriaEditando
       }
     />
 

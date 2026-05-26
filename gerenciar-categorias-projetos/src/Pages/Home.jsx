@@ -1,6 +1,8 @@
 import ProjectCategoriaList from "../Components/ProjectCategoriaList/ProjectCategoriaList";
 
-export default function Home({categorias}) {
+export default function Home({
+  categorias
+}) {
 
   return (
 
@@ -15,8 +17,8 @@ export default function Home({categorias}) {
       </div>
 
       <ProjectCategoriaList
-        categorias = {categorias}
-        mostrarAcoes = {false}
+        categorias={categorias}
+        selecionarCategoria={() => {}}
       />
 
     </div>
