@@ -29,8 +29,7 @@ export default function ProjectCategoriaList({
               selecionarCategoria
             }
             selecionada={
-              categoriaSelecionada?.id ===
-              categoria.id
+              categoriaSelecionada?.id === categoria.id
             }
           />
 
