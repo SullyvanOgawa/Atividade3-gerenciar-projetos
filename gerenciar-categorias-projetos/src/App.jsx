@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { AppRoutes } from './routes/AppRoutes';
+import Categoria from './Pages/Categoria';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
         await resposta.json();
 
       setCategorias(
-        dados.categorias
+        dados.categorias || []
       );
 
     } catch (error) {
@@ -32,6 +32,7 @@ function App() {
       setCategorias([]);
 
     }
+
   }
 
   async function cadastrarCategoria(
@@ -44,12 +45,10 @@ function App() {
         'http://localhost:5000/categorias',
         {
           method: 'POST',
-
           headers: {
             'Content-Type':
               'application/json'
           },
-
           body: JSON.stringify(
             novaCategoria
           )
@@ -66,6 +65,7 @@ function App() {
       );
 
     }
+
   }
 
   async function editarCategoria(
@@ -78,12 +78,10 @@ function App() {
         `http://localhost:5000/categorias/${categoriaAtualizada.id}`,
         {
           method: 'PUT',
-
           headers: {
             'Content-Type':
               'application/json'
           },
-
           body: JSON.stringify(
             categoriaAtualizada
           )
@@ -104,6 +102,7 @@ function App() {
         );
 
         return;
+
       }
 
       await atualizarCategorias();
@@ -116,6 +115,7 @@ function App() {
       );
 
     }
+
   }
 
   async function excluirCategoria(id) {
@@ -139,15 +139,40 @@ function App() {
       );
 
     }
+
   }
 
   useEffect(() => {
 
-    async function carregarCategorias() {
+    const carregarCategorias =
+      async () => {
 
-      await atualizarCategorias();
+        try {
 
-    }
+          const resposta =
+            await fetch(
+              'http://localhost:5000/categorias'
+            );
+
+          const dados =
+            await resposta.json();
+
+          setCategorias(
+            dados.categorias || []
+          );
+
+        } catch (error) {
+
+          console.error(
+            'Erro ao carregar categorias:',
+            error
+          );
+
+          setCategorias([]);
+
+        }
+
+      };
 
     carregarCategorias();
 
@@ -155,7 +180,7 @@ function App() {
 
   return (
 
-    <AppRoutes
+    <Categoria
       categorias={categorias}
       cadastrarCategoria={
         cadastrarCategoria
@@ -169,6 +194,7 @@ function App() {
     />
 
   );
+
 }
 
 export default App;
