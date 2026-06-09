@@ -16,51 +16,42 @@ export default function Categoria({
   const [editando, setEditando] = useState(null);
 
   async function salvar() {
-
-    if (
-      !nome.trim() ||
-      !descricao.trim()
-    ) {
-
-      alert(
-        "Preencha todos os campos."
-      );
-
-      return;
-    }
-
-    try {
-
-      if (editando) {
-
-        await editarCategoria({
-          id: editando,
-          nome,
-          descricao
-        });
-
-      } else {
-
-        await cadastrarCategoria({
-          nome,
-          descricao
-        });
-
-      }
-
-      limpar();
-
-    } catch (erro) {
-
-      console.error(erro);
-
-      alert(
-        "Erro ao salvar categoria."
-      );
-
-    }
-
+  if (!nome.trim() || !descricao.trim()) {
+    alert("Preencha todos os campos.");
+    return;
   }
+
+  const nomeNormalizado = nome.trim().toLowerCase();
+
+  const categoriaExistente = categorias.find(
+    (categoria) => categoria.nome.trim().toLowerCase() === nomeNormalizado && categoria.id !== editando 
+  );
+
+  if (categoriaExistente) {
+    alert("Já existe uma categoria com esse nome.");
+    return;
+  }
+
+  try {
+    if (editando) {
+      await editarCategoria({
+        id: editando,
+        nome,
+        descricao,
+      });
+    } else {
+      await cadastrarCategoria({
+        nome,
+        descricao,
+      });
+    }
+
+    limpar();
+  } catch (erro) {
+    console.error(erro);
+    alert("Erro ao salvar categoria.");
+  }
+}
 
   function limpar() {
 
@@ -74,9 +65,7 @@ export default function Categoria({
 
     setNome(categoria.nome);
 
-    setDescricao(
-      categoria.descricao
-    );
+    setDescricao(categoria.descricao);
 
     setEditando(categoria.id);
 
