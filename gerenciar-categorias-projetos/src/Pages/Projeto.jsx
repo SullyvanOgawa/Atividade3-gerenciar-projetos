@@ -1,68 +1,75 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import FormCategoriaProject from "../Components/FormCategoriaProject/FormCategoriaProject";
-import TabelaCategoria from "../Components/TabelaCategoria/TabelaCategoria";
+import FormProjeto from "../Components/FormProjeto/FormProjeto";
+import TabelaProjeto from "../Components/TabelaProjeto/TabelaProjeto";
 
-export default function Categoria({
+export default function Projeto({
+  projetos,
   categorias,
-  cadastrarCategoria,
-  editarCategoria,
-  excluirCategoria
+  cadastrarProjeto,
+  editarProjeto,
+  excluirProjeto
 }) {
 
   const [nome, setNome] = useState("");
+  const [categoriaId, setCategoriaId] = useState("");
   const [filtro, setFiltro] = useState("");
   const [editando, setEditando] = useState(null);
 
   async function salvar() {
-    if (!nome.trim()) {
-      alert("Preencha o nome da categoria.");
+    if (!nome.trim() || !categoriaId) {
+      alert("Preencha o nome do projeto e selecione uma categoria.");
       return;
     }
 
-    const nomeNormalizado = nome.trim().toLowerCase();
-
-    const categoriaExistente = categorias.find(
-      (categoria) => categoria.nome.trim().toLowerCase() === nomeNormalizado && categoria.id !== editando
+    const categoriaSelecionada = categorias.find(
+      (categoria) => String(categoria.id) === String(categoriaId)
     );
 
-    if (categoriaExistente) {
-      alert("Já existe uma categoria com esse nome.");
+    if (!categoriaSelecionada) {
+      alert("Categoria inválida.");
       return;
     }
 
     try {
       if (editando) {
-        await editarCategoria({
+        await editarProjeto({
           id: editando,
           nome,
+          categoria: categoriaSelecionada,
         });
       } else {
-        await cadastrarCategoria({
+        await cadastrarProjeto({
           nome,
+          categoria: categoriaSelecionada,
         });
       }
 
       limpar();
     } catch (erro) {
       console.error(erro);
-      alert("Erro ao salvar categoria.");
+      alert("Erro ao salvar projeto.");
     }
   }
 
   function limpar() {
 
     setNome("");
+    setCategoriaId("");
     setEditando(null);
 
   }
 
-  function editar(categoria) {
+  function editar(projeto) {
 
-    setNome(categoria.nome);
+    setNome(projeto.nome);
 
-    setEditando(categoria.id);
+    setCategoriaId(
+      projeto.categoria ? String(projeto.categoria.id) : ""
+    );
+
+    setEditando(projeto.id);
 
   }
 
@@ -70,7 +77,7 @@ export default function Categoria({
 
     const confirmar =
       window.confirm(
-        "Deseja excluir esta categoria?"
+        "Deseja excluir este projeto?"
       );
 
     if (!confirmar) {
@@ -79,7 +86,7 @@ export default function Categoria({
 
     try {
 
-      await excluirCategoria(id);
+      await excluirProjeto(id);
 
       if (editando === id) {
         limpar();
@@ -90,16 +97,16 @@ export default function Categoria({
       console.error(erro);
 
       alert(
-        "Erro ao excluir categoria."
+        "Erro ao excluir projeto."
       );
 
     }
 
   }
 
-  const lista = categorias
-    .filter((categoria) =>
-      categoria.nome
+  const lista = projetos
+    .filter((projeto) =>
+      projeto.nome
         .toLowerCase()
         .includes(
           filtro.toLowerCase()
@@ -127,24 +134,27 @@ export default function Categoria({
               fontSize: "3rem"
             }}
           >
-            GESTÃO DE CATEGORIAS
+            GESTÃO DE PROJETOS
           </h1>
 
           <p className="text-muted">
-            Cadastro e gerenciamento de categorias de projetos.
+            Cadastro e gerenciamento de projetos.
           </p>
 
         </div>
 
-        <Link to="/projetos" className="btn btn-outline-primary mt-2">
-          Ir para Projetos
+        <Link to="/" className="btn btn-outline-primary mt-2">
+          Ir para Categorias
         </Link>
 
       </div>
 
-      <FormCategoriaProject
+      <FormProjeto
         nome={nome}
         setNome={setNome}
+        categoriaId={categoriaId}
+        setCategoriaId={setCategoriaId}
+        categorias={categorias}
         salvar={salvar}
         limpar={limpar}
         editando={editando}
@@ -163,13 +173,13 @@ export default function Categoria({
               fontSize: "2rem"
             }}
           >
-            Categorias Cadastradas
+            Projetos Cadastrados
           </h5>
 
           <input
             type="text"
             className="form-control mb-4"
-            placeholder="Pesquisar categoria..."
+            placeholder="Pesquisar projeto..."
             value={filtro}
             onChange={(e) =>
               setFiltro(
@@ -178,8 +188,8 @@ export default function Categoria({
             }
           />
 
-          <TabelaCategoria
-            categorias={lista}
+          <TabelaProjeto
+            projetos={lista}
             editar={editar}
             excluir={excluir}
           />

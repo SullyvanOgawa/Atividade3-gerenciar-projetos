@@ -1,17 +1,17 @@
-export default function TabelaCategoria({
-  categorias,
+export default function TabelaProjeto({
+  projetos,
   editar,
   excluir
 }) {
 
-  if (categorias.length === 0) {
+  if (projetos.length === 0) {
 
     return (
 
       <div className="text-center py-4">
 
         <p className="text-muted mb-0">
-          Nenhuma categoria cadastrada.
+          Nenhum projeto cadastrado.
         </p>
 
       </div>
@@ -41,6 +41,10 @@ export default function TabelaCategoria({
               Nome
             </th>
 
+            <th>
+              Categoria
+            </th>
+
             <th width="220">
               Ações
             </th>
@@ -51,17 +55,21 @@ export default function TabelaCategoria({
 
         <tbody>
 
-          {categorias.map(
-            (categoria) => (
+          {projetos.map(
+            (projeto) => (
 
               <tr
-                key={categoria.id}
+                key={projeto.id}
               >
 
                 <td>
                   <strong>
-                    {categoria.nome}
+                    {projeto.nome}
                   </strong>
+                </td>
+
+                <td>
+                  {projeto.categoria?.nome}
                 </td>
 
                 <td>
@@ -75,7 +83,7 @@ export default function TabelaCategoria({
                         btn-sm
                       "
                       onClick={() =>
-                        editar(categoria)
+                        editar(projeto)
                       }
                     >
                       Editar
@@ -89,7 +97,7 @@ export default function TabelaCategoria({
                       "
                       onClick={() =>
                         excluir(
-                          categoria.id
+                          projeto.id
                         )
                       }
                     >

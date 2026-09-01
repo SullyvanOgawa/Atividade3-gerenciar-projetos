@@ -1,118 +1,131 @@
 import { useEffect, useState } from 'react';
 
-import Categoria from './Pages/Categoria';
+import { AppRoutes } from './Routes/AppRoutes';
+
+const API_URL = 'http://localhost:3000';
+
+// A API guarda os campos em inglês (name). A tela trabalha com nome/categoria.
+function categoriaApiParaTela(categoriaApi) {
+  return {
+    id: categoriaApi.id,
+    nome: categoriaApi.name
+  };
+}
+
+function categoriaTelaParaApi(categoriaTela) {
+  return {
+    name: categoriaTela.nome
+  };
+}
+
+function projetoApiParaTela(projetoApi) {
+  return {
+    id: projetoApi.id,
+    nome: projetoApi.name,
+    categoria: projetoApi.category
+      ? {
+          id: projetoApi.category.id,
+          nome: projetoApi.category.name
+        }
+      : null
+  };
+}
+
+function projetoTelaParaApi(projetoTela) {
+  return {
+    name: projetoTela.nome,
+    category: {
+      id: projetoTela.categoria.id,
+      name: projetoTela.categoria.nome
+    }
+  };
+}
 
 function App() {
 
-  const [categorias, setCategorias] =
-    useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [projetos, setProjetos] = useState([]);
 
   async function atualizarCategorias() {
 
     try {
 
-      const resposta = await fetch(
-        'http://localhost:5000/categorias'
-      );
+      const resposta = await fetch(`${API_URL}/category`);
+      const dados = await resposta.json();
+      const lista = dados.category || [];
 
-      const dados =
-        await resposta.json();
-
-      setCategorias(
-        dados.categorias || []
-      );
+      setCategorias(lista.map(categoriaApiParaTela));
 
     } catch (error) {
 
-      console.error(
-        'Erro ao carregar categorias:',
-        error
-      );
-
+      console.error('Erro ao carregar categorias:', error);
       setCategorias([]);
 
     }
 
   }
 
-  async function cadastrarCategoria(
-    novaCategoria
-  ) {
+  async function atualizarProjetos() {
 
     try {
 
-      await fetch(
-        'http://localhost:5000/categorias',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json'
-          },
-          body: JSON.stringify(
-            novaCategoria
-          )
-        }
-      );
+      const resposta = await fetch(`${API_URL}/project`);
+      const dados = await resposta.json();
+      const lista = dados.projects || [];
 
-      await atualizarCategorias();
+      setProjetos(lista.map(projetoApiParaTela));
 
     } catch (error) {
 
-      console.error(
-        'Erro ao cadastrar:',
-        error
-      );
+      console.error('Erro ao carregar projetos:', error);
+      setProjetos([]);
 
     }
 
   }
 
-  async function editarCategoria(
-    categoriaAtualizada
-  ) {
+  async function cadastrarCategoria(novaCategoria) {
 
     try {
 
-      const resposta = await fetch(
-        `http://localhost:5000/categorias/${categoriaAtualizada.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type':
-              'application/json'
-          },
-          body: JSON.stringify(
-            categoriaAtualizada
-          )
-        }
-      );
+      await fetch(`${API_URL}/category`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(categoriaTelaParaApi(novaCategoria))
+      });
 
-      const dados =
-        await resposta.json();
+      await atualizarCategorias();
 
-      if (
-        !resposta.ok ||
-        !dados.status
-      ) {
+    } catch (error) {
 
-        console.error(
-          'Erro ao editar:',
-          dados.mensagem
-        );
+      console.error('Erro ao cadastrar categoria:', error);
 
+    }
+
+  }
+
+  async function editarCategoria(categoriaAtualizada) {
+
+    try {
+
+      const resposta = await fetch(`${API_URL}/category/${categoriaAtualizada.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(categoriaTelaParaApi(categoriaAtualizada))
+      });
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok || !dados.status) {
+        console.error('Erro ao editar categoria:', dados.mensagem);
         return;
-
       }
 
       await atualizarCategorias();
 
     } catch (error) {
 
-      console.error(
-        'Erro de rede:',
-        error
-      );
+      console.error('Erro de rede ao editar categoria:', error);
 
     }
 
@@ -122,21 +135,81 @@ function App() {
 
     try {
 
-      await fetch(
-        `http://localhost:5000/categorias/${id}`,
-        {
-          method: 'DELETE'
-        }
-      );
+      await fetch(`${API_URL}/category/${id}`, {
+        method: 'DELETE'
+      });
 
       await atualizarCategorias();
+      await atualizarProjetos();
 
     } catch (error) {
 
-      console.error(
-        'Erro ao excluir:',
-        error
-      );
+      console.error('Erro ao excluir categoria:', error);
+
+    }
+
+  }
+
+  async function cadastrarProjeto(novoProjeto) {
+
+    try {
+
+      await fetch(`${API_URL}/project`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(projetoTelaParaApi(novoProjeto))
+      });
+
+      await atualizarProjetos();
+
+    } catch (error) {
+
+      console.error('Erro ao cadastrar projeto:', error);
+
+    }
+
+  }
+
+  async function editarProjeto(projetoAtualizado) {
+
+    try {
+
+      const resposta = await fetch(`${API_URL}/project/${projetoAtualizado.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(projetoTelaParaApi(projetoAtualizado))
+      });
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok || !dados.status) {
+        console.error('Erro ao editar projeto:', dados.mensagem);
+        return;
+      }
+
+      await atualizarProjetos();
+
+    } catch (error) {
+
+      console.error('Erro de rede ao editar projeto:', error);
+
+    }
+
+  }
+
+  async function excluirProjeto(id) {
+
+    try {
+
+      await fetch(`${API_URL}/project/${id}`, {
+        method: 'DELETE'
+      });
+
+      await atualizarProjetos();
+
+    } catch (error) {
+
+      console.error('Erro ao excluir projeto:', error);
 
     }
 
@@ -144,53 +217,22 @@ function App() {
 
   useEffect(() => {
 
-    const carregarCategorias =
-      async () => {
-
-        try {
-
-          const resposta =
-            await fetch(
-              'http://localhost:5000/categorias'
-            );
-
-          const dados =
-            await resposta.json();
-
-          setCategorias(
-            dados.categorias || []
-          );
-
-        } catch (error) {
-
-          console.error(
-            'Erro ao carregar categorias:',
-            error
-          );
-
-          setCategorias([]);
-
-        }
-
-      };
-
-    carregarCategorias();
+    atualizarCategorias();
+    atualizarProjetos();
 
   }, []);
 
   return (
 
-    <Categoria
+    <AppRoutes
       categorias={categorias}
-      cadastrarCategoria={
-        cadastrarCategoria
-      }
-      editarCategoria={
-        editarCategoria
-      }
-      excluirCategoria={
-        excluirCategoria
-      }
+      cadastrarCategoria={cadastrarCategoria}
+      editarCategoria={editarCategoria}
+      excluirCategoria={excluirCategoria}
+      projetos={projetos}
+      cadastrarProjeto={cadastrarProjeto}
+      editarProjeto={editarProjeto}
+      excluirProjeto={excluirProjeto}
     />
 
   );
