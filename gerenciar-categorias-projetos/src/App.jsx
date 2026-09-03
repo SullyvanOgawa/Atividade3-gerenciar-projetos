@@ -58,7 +58,7 @@ function App() {
 
     } catch (error) {
 
-      console.error('Erro ao carregar categorias:', error);
+      alert('Erro ao carregar categorias:', error);
       setCategorias([]);
 
     }
@@ -77,7 +77,7 @@ function App() {
 
     } catch (error) {
 
-      console.error('Erro ao carregar projetos:', error);
+      alert('Erro ao carregar projetos:', error);
       setProjetos([]);
 
     }
@@ -98,7 +98,7 @@ function App() {
 
     } catch (error) {
 
-      console.error('Erro ao cadastrar categoria:', error);
+      alert('Erro ao cadastrar categoria:', error);
 
     }
 
@@ -133,20 +133,37 @@ function App() {
 
   async function excluirCategoria(id) {
 
-    try {
+    const categoriaEmUso = projetos.some(
+    (projeto) => projeto.categoria?.id === id
+  );
 
-      await fetch(`${API_URL}/category/${id}`, {
-        method: 'DELETE'
-      });
+  if (categoriaEmUso) {
+    alert(
+      'Não é possível excluir esta categoria, pois ela está vinculada a um projeto.'
+    );
 
-      await atualizarCategorias();
-      await atualizarProjetos();
+    return;
+  }
 
-    } catch (error) {
+  try {
 
-      console.error('Erro ao excluir categoria:', error);
+    const resposta = await fetch(`${API_URL}/category/${id}`, {
+      method: 'DELETE'
+    });
 
+    if (!resposta.ok) {
+      alert('Não foi possível excluir a categoria.');
+      return;
     }
+
+    await atualizarCategorias();
+    await atualizarProjetos();
+
+  } catch (error) {
+
+    alert('Erro ao excluir categoria.');
+
+  }
 
   }
 
@@ -164,7 +181,7 @@ function App() {
 
     } catch (error) {
 
-      console.error('Erro ao cadastrar projeto:', error);
+      alert('Erro ao cadastrar projeto:', error);
 
     }
 
@@ -209,7 +226,7 @@ function App() {
 
     } catch (error) {
 
-      console.error('Erro ao excluir projeto:', error);
+      alert('Erro ao excluir projeto:', error);
 
     }
 

@@ -62,3 +62,35 @@ body {
 .form-label {
   font-weight: 500;
 }
+
+/* Menu principal: alterna entre Projetos e Categorias sem trocar de página. */
+.project-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.project-menu-item {
+  border: 0;
+  background-color: transparent;
+  color: #6c757d;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.project-menu-item:hover {
+  color: #2B6BCF;
+}
+
+.project-menu-item.active {
+  background-color: #2B6BCF;
+  color: #FFFFFF;
+}

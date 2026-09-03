@@ -38,7 +38,7 @@ export default function TabelaProjeto({
           <tr>
 
             <th>
-              Nome
+              Projeto
             </th>
 
             <th>
@@ -69,7 +69,9 @@ export default function TabelaProjeto({
                 </td>
 
                 <td>
-                  {projeto.categoria?.nome}
+                  <strong> 
+                    {projeto.categoria?.nome} 
+                  </strong>
                 </td>
 
                 <td>

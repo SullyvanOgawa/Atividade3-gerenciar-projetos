@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import FormProjeto from "../Components/FormProjeto/FormProjeto";
 import TabelaProjeto from "../Components/TabelaProjeto/TabelaProjeto";
@@ -120,34 +119,7 @@ export default function Projeto({
 
   return (
 
-    <div className="container py-4">
-
-      <div className="mb-4 d-flex justify-content-between align-items-start">
-
-        <div>
-
-          <h1
-            style={{
-              fontFamily: "Bebas Neue",
-              color: "#2B6BCF",
-              letterSpacing: "2px",
-              fontSize: "3rem"
-            }}
-          >
-            GESTÃO DE PROJETOS
-          </h1>
-
-          <p className="text-muted">
-            Cadastro e gerenciamento de projetos.
-          </p>
-
-        </div>
-
-        <Link to="/" className="btn btn-outline-primary mt-2">
-          Ir para Categorias
-        </Link>
-
-      </div>
+    <>
 
       <FormProjeto
         nome={nome}
@@ -198,7 +170,7 @@ export default function Projeto({
 
       </div>
 
-    </div>
+    </>
 
   );
 }

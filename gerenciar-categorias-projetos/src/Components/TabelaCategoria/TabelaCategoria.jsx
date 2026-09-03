@@ -38,7 +38,7 @@ export default function TabelaCategoria({
           <tr>
 
             <th>
-              Nome
+              Categoria
             </th>
 
             <th width="220">

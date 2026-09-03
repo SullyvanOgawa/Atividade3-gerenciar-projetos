@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import FormCategoriaProject from "../Components/FormCategoriaProject/FormCategoriaProject";
 import TabelaCategoria from "../Components/TabelaCategoria/TabelaCategoria";
@@ -113,34 +112,7 @@ export default function Categoria({
 
   return (
 
-    <div className="container py-4">
-
-      <div className="mb-4 d-flex justify-content-between align-items-start">
-
-        <div>
-
-          <h1
-            style={{
-              fontFamily: "Bebas Neue",
-              color: "#2B6BCF",
-              letterSpacing: "2px",
-              fontSize: "3rem"
-            }}
-          >
-            GESTÃO DE CATEGORIAS
-          </h1>
-
-          <p className="text-muted">
-            Cadastro e gerenciamento de categorias de projetos.
-          </p>
-
-        </div>
-
-        <Link to="/projetos" className="btn btn-outline-primary mt-2">
-          Ir para Projetos
-        </Link>
-
-      </div>
+    <>
 
       <FormCategoriaProject
         nome={nome}
@@ -188,7 +160,7 @@ export default function Categoria({
 
       </div>
 
-    </div>
+    </>
 
   );
 }
